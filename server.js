@@ -9,7 +9,7 @@ const DATA_FILE = 'data.json';
 app.use(bodyParser.json());
 
 // Ruta GET
-app.get('/data', (req, res) => {
+app.get('/get-data', (req, res) => {
     fs.readFile(DATA_FILE, (err, data) => {
         if (err) {
             return res.status(500).json({ error: 'Error al leer el archivo' });
@@ -20,7 +20,7 @@ app.get('/data', (req, res) => {
 });
 
 // Ruta POST
-app.post('/data', (req, res) => {
+app.post('/update-data', (req, res) => {
     const newData = req.body;
 
     // Guardar el nuevo objeto en el archivo JSON
