@@ -1,11 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const cors = require('cors'); // Importa cors
 const app = express();
 const PORT = 3000;
 const DATA_FILE = 'data.json';
 
 // Middleware
+app.use(cors({
+    origin: 'chrome-extension://hbfponicjjmfebjlgebjbpcgajdclffo', // Permitir solo tu extensión
+    methods: ['GET', 'POST'], // Permitir solo GET y POST
+    allowedHeaders: ['Content-Type'] // Permitir solo el encabezado Content-Type
+}));
 app.use(bodyParser.json());
 
 // Ruta GET
@@ -34,5 +40,5 @@ app.post('/update-data', (req, res) => {
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log("Servidor corriendo");
 });
