@@ -4,11 +4,11 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 const PORT = 3000;
-const DATA_FILE = 'data.json';
+const DATA_FILE = 'database/data.json';
 
 // Middleware
 app.use(cors({
-    origin: 'chrome-extension://hbfponicjjmfebjlgebjbpcgajdclffo',
+    origin: '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
@@ -37,7 +37,7 @@ app.post('/update-data', (req, res) => {
     // Guardar el nuevo objeto en el archivo JSON
     fs.writeFile(DATA_FILE, JSON.stringify(newData, null, 2), (err) => {
         if (err) {
-            console.error('Error al guardar los datos:', err);
+            console.error('Error al guardar los datos:');
             return res.status(500).json({ error: 'Error al guardar los datos' });
         }
         res.status(201).json({ message: 'Datos guardados exitosamente' });
